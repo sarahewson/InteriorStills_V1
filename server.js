@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var db = require('./dbConfig');
-
+// does it show up
 var app = express();
  
 // view engine setup
