@@ -1,24 +1,43 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Interior Stills</title>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <title>Interior</title>
+            <!-- bootstrap here? -->
     <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    
+    <style>
+        body {
+            overflow: auto; /* Use 'scroll' if you want a scroll bar always visible */
+        }
+    </style>
+
 </head>
 
 <body>
     <header>
-        <h1>Interior Stills</h1>
+        <h1>Interior Photographers</h1>
         
+        <!-- edited chatGPT basic home page code-->
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href=home>Home</a></li>
                 <li><a href=groupProfile>Find a Photographer</a></li>
                 <li><a href=login>Photographers Login</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>  
+                <li><a href=gallery>Gallery</a></li>
+                <li><a href=about>About</a></li>
+                <li><a href=contact>Contact</a></li>  
+                <li>
+                    <!-- added Ganeshan's "form method" search tool code -->
+                    <form method="POST">
+                        <i class="material-icons mdc-button__icon">search</i>
+                        <input class="form-control" type="text" placeholder="&nbsp;&nbsp;&nbsp;Search" name="search"></li>
+                    </form>			
+                </li>
             </ul>
         </nav>
+
+
         
     </header>
     
