@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // server.js
 const express = require('express');
 const cookieParser = require("cookie-parser");
@@ -13,6 +14,15 @@ var mysql = require('mysql');
 let encodeUrl = parseUrl.urlencoded({ extended: false });
 
 // // view engine setup
+=======
+var express = require('express');
+var path = require('path');
+var db = require('./dbConfig');
+// does it show up - yes it does!
+var app = express();
+ 
+// view engine setup
+>>>>>>> fffca5599a66f67539aa92f1eb065046d3ac7745
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
  
