@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+    <title>Search Photographers</title>
+</head>
+<body>
+    
+    <!-- <style>
+        body {
+            background-image: url('images/interiorbackground.jpg');
+        }
+    </style> -->
+    
+    
+    <div class="home">
+        <a class href="home">Interior Stills</a>
+    </div>
+
+    <div class="topnav">
+        <a class href="login">Photographers Login</a>
+    </div>
+    
+    <div class="about">
+        <a class href="about">About</a>
+    </div>
+
+
+<!-- MAIN (Center website) -->
+<div class="main">
+
+    <h2>LISTED PHOTOGRAPHERS</h2>
+    
+    <div id="myBtnContainer">
+      <button class="btn active" onclick="filterSelection('all')"> All Categories</button>
+      <button class="btn" onclick="filterSelection('residential')"> Residential</button>
+      <button class="btn" onclick="filterSelection('retail')"> Retail</button>
+      <button class="btn" onclick="filterSelection('hospitality')"> Hospitality</button>
+    </div>
+    
+    <!-- Portfolio Gallery Grid -->
+    <div class="row">
+      <div class="column one">
+        <div class="content">
+          <img src="/images/residential_hero1.jpg" alt="Residential_Interior" style="width:100%">
+          <h4>Photographer 1</h4>
+          <p>Residential Photographer</p>
+        </div>
+      </div>
+        <div class="column one">
+        <div class="content">
+        <img src="/images/hospitality_hero1.jpg" alt="Hospitality_Interior" style="width:100%">
+          <h4>Photographer 2</h4>
+          <p>Hospitality Photographer</p>
+        </div>
+      </div>
+        <div class="column one">
+        <div class="content">
+        <img src="/images/retail_hero1.jpg" alt="Retail_Interior" style="width:100%">
+          <h4>Photographer 3</h4>
+          <p>Retail Photographer</p>
+        </div>
+      </div>
+      
+    <!-- END GRID -->
+    </div>
+    
+    <!-- END MAIN -->
+    </div>
+    
+
+    <script>
+    filterSelection("all")
+    function filterSelection(c) {
+      var x, i;
+      x = document.getElementsByClassName("column");
+      if (c == "all") c = "";
+      for (i = 0; i < x.length; i++) {
+        w3RemoveClass(x[i], "show");
+        if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+      }
+    }
+    
+    function w3AddClass(element, name) {
+      var i, arr1, arr2;
+      arr1 = element.className.split(" ");
+      arr2 = name.split(" ");
+      for (i = 0; i < arr2.length; i++) {
+        if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+      }
+    }
+    
+    function w3RemoveClass(element, name) {
+      var i, arr1, arr2;
+      arr1 = element.className.split(" ");
+      arr2 = name.split(" ");
+      for (i = 0; i < arr2.length; i++) {
+        while (arr1.indexOf(arr2[i]) > -1) {
+          arr1.splice(arr1.indexOf(arr2[i]), 1);     
+        }
+      }
+      element.className = arr1.join(" ");
+    }
+    
+    
+    // Add active class to the current button (highlight it)
+    var btnContainer = document.getElementById("myBtnContainer");
+    var btns = btnContainer.getElementsByClassName("btn");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener("click", function(){
+        var current = document.getElementsByClassName("active");
+        current[0].className = current[0].className.replace(" active", "");
+        this.className += " active";
+      });
+    }
+    </script>
+    
+    
+    
+</body>
+</html>

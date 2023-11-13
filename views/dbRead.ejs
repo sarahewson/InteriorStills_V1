@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+    <title>dbRead</title>
+</head>
+<body>
+
+    <table class="table table-hover">
+        <tr>
+            <th>id</th>
+            <th>first_name</th>
+            <th>last_name</th>
+            <th>email</th>
+            <th>password</th>
+            <th>register_date</th>
+        </tr>
+
+        <% if(userData.length!=0) { var i=1; userData.forEach(function(data) {
+        %>
+        <tr>
+            <td><%=data.id %></td>
+            <td><%=data.first_name %></td>
+            <td><%=data.last_name %></td>
+            <td><%=data.email %></td>
+            <td><%=data.password %></td>
+            <td><%=data.register_date %></td> 
+        </tr>
+        <% i++; }) %> <% } else{ %>
+        <tr>
+            <td colspan="7">No Data Found</td>
+        </tr>  
+        <% } %>
+    </table>
+    
+</body>
+</html>

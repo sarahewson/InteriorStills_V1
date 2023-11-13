@@ -1,51 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-            <title>Interior</title>
-            <!-- bootstrap here? -->
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+    <title>home</title>
+</head>
+<body>
     
     <style>
         body {
-            overflow: auto; /* Use 'scroll' if you want a scroll bar always visible */
+            background-image: url('images/interiorbackground.jpg');
         }
     </style>
 
-</head>
+<!-- Nav bars -->
+<div class="home">
+    <a class href="home">Interior Stills</a>
+</div>
 
-<body>
-    <header>
-        <h1>Interior Photographers</h1>
+<div class="topnav">
+    <a class href="login">Photographers Login</a>
+</div>
+
+<div class="about">
+    <a class href="about">About</a>
+</div>
         
-        <!-- edited chatGPT basic home page code-->
-        <nav>
-            <ul>
-                <li><a href=home>Home</a></li>
-                <li><a href=groupProfile>Find a Photographer</a></li>
-                <li><a href=login>Photographers Login</a></li>
-                <li><a href=gallery>Gallery</a></li>
-                <li><a href=about>About</a></li>
-                <li><a href=contact>Contact</a></li>  
-                <li>
-                    <!-- added Ganeshan's "form method" search tool code -->
-                    <form method="POST">
-                        <i class="material-icons mdc-button__icon">search</i>
-                        <input class="form-control" type="text" placeholder="&nbsp;&nbsp;&nbsp;Search" name="search"></li>
-                    </form>			
-                </li>
-            </ul>
-        </nav>
+<!-- Click to search for Interior Photographers -->
+<div class="profiles">
+    <a class href="profiles">Find an Interior Photographer</a>
+</div>
+    
+        
 
 
         
-    </header>
-    
-      
     
 
-    <footer>
-        <p>&copy; 2023 Interior Stills</p>
-    </footer>
+<!-- capture input data from a home page. -->
+<!-- <div>
+    <form action="/" method="POST">
+        <div class="form-group">
+            <label for="id">id</label>
+            <input type="text" name="id">
+        </div>
+        <div class="form-group">
+            <label for="first_name">first_name</label>
+            <input type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" name="email">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div> -->
+
+<!-- <div class="container">
+    <h2>Log in to Photographers Profile</h2>
+    
+    <form action="/dashboard" method="POST">
+      <div class="form-group mb-3">
+          <label>Email</label>
+          <input type="text" class="form-control" placeholder="example@email.com" name="email">
+      </div>
+      <div class="form-group mb-3">
+          <label>Password</label>
+          <input type="password" class="form-control" placeholder="********" name="password">
+        </div>
+      <div class="d-grid mt-3">
+      <button type="submit" class="btn btn-primary form-control">Login</button>
+      </div>
+    </form>
+    <a href="register.ejs">Register</a>
+  </div> -->
+    
 </body>
 </html>

@@ -1,251 +1,104 @@
-var express = require('express');
-var path = require('path');
-var db = require('./dbConfig');
-var app = express();
+
+const express = require('express');		// import Express web Framework from NodeJS.
+const path = require('path');			// set path for public folder.		
+const mysql = require('mysql'); 		// import mySQL.(**move to dbConfig.js later)
+const dotenv = require('dotenv'); 		// import env. for password...
+dotenv.config({ path: './.env'}); 		// point const env to .env file path (same level path as server.js file).
+const app = express(); 					// start server.
 
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
- 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const db = mysql.createConnection({ 	// create database connection.(**move to dbConfig.js later)
+	host: process.env.DATABASE_HOST,
+	user: process.env.DATABASE_USER,
+	password: process.env.DATABASE_PASSWORD,
+	database: process.env.DATABASE
+}); 
 
-app.use(express.static(path.join(__dirname, 'public')));
+const publicDirectory = path.join(__dirname, './public'); 	// define the Public directory to CSS & images.
+app.use(express.static(publicDirectory)); // Point Express to use the static files in publicDirectory.
 
-app.get('/', function(req, res, next) {
-es.render('home', { title: 'Home' });
+
+app.set('view engine', 'ejs'); 			// set ejs engine to display HTML.
+
+app.use('/public', express.static('public')); 	// serve up static CSS files in public/stylesheets folder when public link is called in ejs files.
+// app.use(session({secret: 'yoursecret', resave: true, saveUninitialized: true}));
+
+db.connect(function(err) {				// (**move to dbConfig.js later)			
+	if (err) throw err;					// check step 70 how to do this.
+	console.log('MySQL database is connected successfully!');
 });
 
-//session middleware
-app.use(sessions({
-    secret: "thisismysecrctekey",
-    saveUninitialized:true,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 24 hours
-    resave: false
-}));
 
-app.use(cookieParser());
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root", // my username
-    password: "", // my password
-    database: "stills"
+app.get('/home', function(req, res) {
+	res.render('home',{title: 'home'});
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/register.ejs');
-})
-
-app.post('/register', encodeUrl, (req, res) => {
-    var first_name = req.body.first_name;
-    var last_name = req.body.last_name;
-    var email = req.body.email;
-    var password = req.body.password;
-
-    con.connect(function(err) {
-        if (err){
-            console.log(err);
-        };
-        // checking user already registered or no
-        con.query(`SELECT * FROM users WHERE email = '${email}' AND password  = '${password}'`, function(err, result){
-            if(err){
-                console.log(err);
-            };
-            if(Object.keys(result).length > 0){
-                res.sendFile(__dirname + '/failReg.ejs');
-            }else{
-            //creating user page in userPage function
-            function userPage(){
-                // We create a session for the dashboard (user page) page and save the user data to this session:
-                req.session.user = {
-                    firstname: first_name,
-                    lastname: last_name,
-                    email: email,
-                    password: password 
-                };
-
-                res.send(`
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <title>Login and register form with Node.js, Express.js and MySQL</title>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-                </head>
-                <body>
-                    <div class="container">
-                        <h3>Hi, ${req.session.user.first_name} ${req.session.user.last_name}</h3>
-                        <a href="/">Log out</a>
-                    </div>
-                </body>
-                </html>
-                `);
-            }
-                // inserting new user data
-                var sql = `INSERT INTO users (first_name, last_name, email, password) VALUES ('${first_name}', '${last_name}', '${email}', '${password}')`;
-                con.query(sql, function (err, result) {
-                    if (err){
-                        console.log(err);
-                    }else{
-                        // using userPage function for creating user page
-                        userPage();
-                    };
-                });
-
-        }
-
-        });
-    });
-
-
+app.get('/about', function(req, res) {
+	res.render('about',{title: 'about'});
 });
 
-app.get("/login", (req, res)=>{
-    res.sendFile(__dirname + "/login.ejs");
+app.get('/login', function(req, res) {
+	res.render('login',{title: 'login'});
 });
 
-app.post("/dashboard", encodeUrl, (req, res)=>{
-    var user_name = req.body.user_name;
-    var password = req.body.password;
-
-    con.connect(function(err) {
-        if(err){
-            console.log(err);
-        };
-        con.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`, function (err, result) {
-          if(err){
-            console.log(err);
-          };
-
-          function userPage(){
-            // We create a session for the dashboard (user page) page and save the user data to this session:
-            req.session.user = {
-                first_name: result[0].first_name,
-                last_name: result[0].last_name,
-                email: email,
-                password: password 
-            };
-
-            res.send(`
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <title>Login and register form with Node.js, Express.js and MySQL</title>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-            </head>
-            <body>
-                <div class="container">
-                    <h3>Hi, ${req.session.user.first_name} ${req.session.user.last_name}</h3>
-                    <a href="/">Log out</a>
-                </div>
-            </body>
-            </html>
-            `);
-        }
-
-        if(Object.keys(result).length > 0){
-            userPage();
-        }else{
-            res.sendFile(__dirname + '/failLog.html');
-        }
-
-        });
-    });
+app.get('/register', function(req, res) {
+	res.render('register',{title: 'Register'});
 });
 
-// app.listen(4000, ()=>{
-//     console.log("Server running on port 4000");
-// });
+app.get('/profiles', function(req, res) {
+	res.render('profiles.ejs',{title: 'profiles'});
+});
 
-app.listen(3000);
-console.log('Node app is running on port 3000');
+// dbRead page displays the retrieved data in an HTML table
+app.get('/dbRead', function(req, res) {
+	db.query("SELECT * FROM users", function (err, result) {
+		if (err) throw err;
+		console.log(result);
+		res.render('dbRead', { title: 'xyz', userData: result});
+	});
+});
 
 
-// GANESHAN'S CODES BELOW FOR REFERENCE - ABOVE IS NEW CODE FROM the following link:
-// https://dev.to/jahongir2007/creating-a-login-and-registration-form-with-nodejs-expressjs-and-mysql-database-160n
-
-// var express = require('express');
-// var path = require('path');
-// var db = require('./dbConfig');
-// var app = express();
- 
-// // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
- 
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// app.get('/', function(req, res, next) {
-// 	res.render('home', { title: 'Home' });
-// });
-
-// app.post('/', function(req, res, next) {
-// 	var search = req.body.search;
-// 	console.log(search);
-// 	//db.query(`SELECT * FROM incidents WHERE beach="${search}"`, function (err, result) {
-// 	db.query(`SELECT * FROM incidents WHERE MATCH description AGAINST ("${search}" WITH QUERY EXPANSION);`, function (err, result) {
+// writing data captured on home page form to MySQL database.
+// When a user insert data in the HTML form on home page.
+// LOGIN USER from 112 steps doc.
+// app.post('/', function(req, res) {
+// 	var abcd = req.body.id;
+// 	var bcde = req.body.first_name;
+// 	var xyz = req.body.email;
+// 	console.log(req.body); 
+// 	var sql = `INSERT INTO users (id, first_name, email) VALUES ("${abcd}", "${bcde}", "${xyz}")`;
+// 	db.query(sql, function (err, result) {
 // 		if (err) throw err;
-// 		console.log(result);
-// 		res.render('getIncidents', { title: 'xyz', incidentData: result});
+// 		console.log("1 record inserted");
 // 	});
+// 	return res.render('index', {errormessage: 'insert data successfully'});
 // });
 
+//LOGIN USER from swimschool code
+app.post('/auth', function(req, res) {
+	let email = req.body.email;
+	let password = req.body.password;
+	if (email && password) {
+		db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(error, results, fields) {
+			if (error) throw error;
+			if (results.length > 0) {
+				req.session.loggedin = true;
+				req.session.email = email;				
+				res.redirect('/memberportal');				
+			} else {
+				res.send('Incorrect email address and/or password!');
+			}			
+			res.end();
+		});
+	} else {
+		res.send('Please enter email address and password!');
+		res.end();
+	}
+});
 
-// app.get('/videos', function(req, res, next) {
-// 	res.render('videos', { title: 'Videos' });
-// });
 
-
-// app.get('/addIncidents', function(req, res, next) {
-// 	res.render('addIncidents', { title: 'Home' });
-// });
-
- 
-// app.get('/getIncidents', function(req, res){
-// 	db.query("SELECT * FROM incidents", function (err, result) {
-// 		if (err) throw err;
-// 		console.log(result);
-// 		res.render('getIncidents', { title: 'xyz', incidentData: result});
-// 	});
-// });
- 
-// app.get('/deaths', function(req, res){
-// 	db.query("SELECT * FROM deaths", function (err, result) {
-// 		if (err) throw err;
-// 		console.log(result);
-// 		res.render('deaths', { title: 'xyp', deathData: result});
-// 	});
-// });
-
-// app.get('/graph', function(req, res){
-// 	db.query("SELECT * FROM deaths", function (err, result) {
-// 		if (err) throw err;
-// 		console.log(result);
-// 		res.render('graph', { title: 'graph', graphData: result});
-// 	});
-// });
-
-// Ganeshan's code
-// app.post('/addIncidents', function(req, res, next) {
-// 	var beach = req.body.beach;
-// 	var city = req.body.city;
-// 	var email = req.body.email;
-// 	var detail = req.body.detail;
-// 	var sql = `INSERT INTO incidents (beach, city, email, detail, reported_at) VALUES ("${beach}", "${city}", "${email}", "${detail}", NOW())`;
-// 	db.query(sql, function(err, result) {
-// 		if (err) throw err;
-// 		console.log('record inserted');
-// 		res.render('addIncidents');
-// 	});
-// });
-
- 
-// app.listen(3000);
-// console.log('Node app is running on port 3000');
+app.listen(3000, function (req, res) { // tell Express web Framework which port number to listen to.
+	console.log('server is running on port 3000.')
+});
