@@ -5,53 +5,55 @@
     <meta charset="UTF-8"> <!-- Login and register form with Node.js, Express.js and MySQL -->
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Metadata tag - Width & Zoom level of the following code for the page -->
     <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
-  </head>
+    <title>Portal</title>
+    <style>
+      body {
+          background-image: url('images/interiorbackground.jpg');
+      }
+  </style>
   
-<body>
-  
-  <style>
-    body {
-        background-image: url('images/interiorbackground.jpg');
-    }
-</style>
-
-<!-- Nav bars -->
-<div class="home">
-  <a class href="home">Interior Stills</a>
+  <!-- NAV BARS -->
+  <div class=nav1>
+      <a class href="home">Interior Stills</a>
   </div>
+  
+  <div class=nav2>
+      <a class href="about">About</a>    
+      <a class href="Register">Register</a>
+      <a class href="profiles">Search</a>
+  </div>
+</head>
+  
+<body>    
+<!-- LOGIN FORM -->  
+<form action="/login" method="POST">
+  <form class="login-form"> 
+    <h3>Login</h3>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+    </div>
 
-<div class="topnav">
-<a class href="login">Photographers Login</a>
-</div>
-
-<div class="about">
-<a class href="about">About</a>
-</div>
+    <div class="form-group">					
+      <a href="resetpassword">forgot password?</a>							
+    </div>
     
+    <button type="submit">Login</button>
 
+    <% if (message) { %>
+      <h3 class="alert alert-danger"><%= message %></h3>
+    <% } %>
 
-<!-- Login form -->
-    <div class="container">
-        <h2>Log in</h2>
-        
-        <!-- <form action="/dashboard" method="POST"> -->
-        <form action="/auth" method="POST">
-          <div class="form-group mb-3">
-              <label>Email</label>
-              <input type="text" class="form-control" placeholder="example@email.com" name="email">
-          </div>
-          <div class="form-group mb-3">
-              <label>Password</label>
-              <input type="password" class="form-control" placeholder="********" name="password">
-            </div>
-          <div class="d-grid mt-3">
-          <button type="submit" class="btn btn-primary form-control">Login</button>
-          </div>
-        </form>
-        <a href="register">Register</a>
-      </div>
-
-      
+    <h6>Create an account. <a href="register">Register here.</a></h6>
+  
+  </form>
+</form>
+</div>
 
 </body>
 </html>
