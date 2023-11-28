@@ -41,6 +41,10 @@ app.get('/login', function(req, res) {
 	res.render('login',{title: 'photographers portal', message: null});
 });
 
+// app.get('/logout', function(req, res) {
+// 	res.render('home',{title: 'home'});
+// });
+
 app.get('/profiles', function(req, res) {
 	res.render('profiles',{title: 'profiles'});
 });
@@ -48,6 +52,20 @@ app.get('/profiles', function(req, res) {
 app.get('/photographerPage', function(req, res) {
 	res.render('photographerPage', {title: 'photographerPage', first_name: null });
 });
+
+app.get('/logout', function(req, res) {
+	// Destroy the session
+	req.session.destroy(function(err) {
+	  if (err) {
+		console.error(err);
+		console.log('error logging out');
+		res.redirect('/error'); // Redirect to an error page if something goes wrong
+	  } else {
+		console.log('logged out');
+		res.redirect('/home'); // Redirect to home or any other page after logout
+	  }
+	});
+  });
 
 // dbRead page displays the retrieved data in an HTML table
 app.get('/dbRead', function(req, res) {
@@ -102,7 +120,7 @@ app.post('/register', async function(req, res, next) {
 		  req.session.loggedin = true;
 		  req.session.email = email;
 		  console.log('User registered');
-		  return res.redirect('/photographerPage');
+		  return res.render('/photographerPage');
 		} else {
 		  console.log('Registration failed for an unknown reason');
 		  return res.render('register', {
@@ -140,18 +158,19 @@ app.post('/login', function (req, res) {
 			if (passwordMatch) {
 				// Passwords match, user is authenticated
 				req.session.user = user;
-   
-			if (user.user_type === 'admin') {
-				// Admin is authenticated
-				console.log("User Type: admin");
-				res.redirect('/profiles');
+				console.log(req.session.user);
 
-			} else if (user.user_type === 'photographer') {
+			if (user.user_type === 'photographer') {
 				// Regular user is authenticated
 				console.log("User Type: photographer");
-				res.redirect('photographerPage');
-			} 
-				
+				res.render('photographerPage', { 
+				title: 'xyz', 
+				first_name:req.session.user.first_name,
+				bio:req.session.user.bio,
+				city:req.session.user.city,
+				phone:req.session.user.phone,
+				email:req.session.user.email});
+			} 	
 			} else {
 				// Passwords don't match; render an error message on the login page
 				console.log('Incorrect password');
@@ -164,86 +183,65 @@ app.post('/login', function (req, res) {
 
    
 
-// Users can access this if they are logged in
-
-// GET route to render the PhotographerPage form
-// app.get('/photographerPage', function(req, res) {
-// 	if (req.session.loggedin) {
-// 	  // Assuming the user's email is stored in the session
-// 	  console.log('request login session');
-// 	  const email = req.session.email;
-  
-// 	  // Fetch user data from the database based on the user's email
-// 	  db.query("SELECT * FROM user WHERE email = ?", [email], function(err, userData) {
-// 		if (err) {
-// 		  // Handle the error appropriately, e.g., send an error page
-// 		  console.log('Error fetching user data:', err);
-// 		  res.send('Error fetching user data.');
-// 		} else {
-// 		  if (userData.length > 0) {
-// 			console.log('user data is correct.');
-// 			res.render('photographerPage', { userData: userData[0] });
-// 		  } else {
-// 			// User not found based on the email
-// 			console.log('user not found.');
-// 			res.send('User not found.');
-// 		  }
-// 		}
-// 	  });
-// 	} else {
-// 	  res.send('Please login to view this page.');
-// 	}
-//   });
-
+// DISPLAY DATABASE FIELDS FROM USER LOGIN SESSION.
 app.get('/photographerPage', function(req, res) {
-	// Fetch user data from the database
-	console.log('fetched first_name');
-	db.query("SELECT first_name, city FROM user WHERE id = ?", [id], function(err, userData) {
-	  if (err) {
-		console.log('Error fetching user data:', err);
-		// Handle the error appropriately
-		// Send an error response or render an error page
-		res.send('Error fetching user data.');
-	  } else {
-		// Render the page and pass the userData to your EJS template
-		console.log('retrieved photographer name from db');
-		res.render('photographerPage', { first_name: userData[0].first_name });
-	  }
+	// Check if the user is logged in
+    if (!req.session.user) {
+        // If the user is not logged in, redirect to the login page
+        return res.redirect('/login');
+    }
+	// correspond with line 157. Render the photographerPage with user information.
+	res.render('photographerPage', { 
+	title: 'xyz', 
+	first_name: req.session.user.first_name,
+	bio:req.session.user.bio,
+	city:req.session.user.city,
+	phone:req.session.user.phone,
+	email:req.session.user.email
 	});
   });
-  
-//   // POST route to handle profile updates
-//   app.post('/photographerPage', function(req, res) {
-// 	if (req.session.loggedin) {
-// 	  const email = req.session.email;
-// 	  const first_name = req.body.first_name;
-// 	  const bio = req.body.bio;
-// 	  // Other updated fields...
-  
-// 	// Fetch user data from the database based on the user's email
-// 	db.query("INSERT INTO first_name, bio FROM user WHERE email = ?", [first_name, bio, email], function(err, userData) {
-// 		if (err) {
-// 		  // Handle the error appropriately, e.g., send an error page
-// 		  console.log('Error fetching user data:', err);
-// 		  res.send('Error fetching user data.');
-// 		} else {
-// 		  if (userData.length > 0) {
-// 			res.render('photographerPage', { userData: userData[0] });
-// 		  } else {
-// 			// User not found based on the email
-// 			console.log('user not found');
-// 			res.send('User not found.');
-// 		  }
-// 		}
-// 	  });
-// 	} else {
-// 		console.log('please log in to view this page');
-// 	  res.send('Please login to view this page.');
-// 	}
+
+// DISPLAY fields from database in HTML
+app.get('/profiles', function(req, res) {
+    var first_name = req.body.first_name;
+	var last_name = req.body.last_name;
+});
+	db.query("SELECT * first_name, last_name FROM user", [first_name, last_name], function (err, result) {
+				if (err) throw err;
+				console.log(result);
+				res.render('profiles', { 
+					title: 'xyz', 
+					first_name: req.body.first_name,
+					last_name:req.body.last_name,
+					});
+				  });
+
+	// correspond with line 157. Render the photographerPage with user information.
+// 	res.render('profiles', { 
+// 	title: 'xyz', 
+// 	first_name: req.session.user.first_name,
+// 	bio:req.session.user.bio,
+// 	city:req.session.user.city,
+// 	phone:req.session.user.phone,
+// 	email:req.session.user.email
+// 	});
 //   });
+
+
+// if (user.user_type === 'photographer') {
+// 	// Regular user is authenticated
+// 	console.log("User Type: photographer");
+// 	res.render('photographerPage', { 
+// 	title: 'xyz', 
+// 	first_name:req.session.user.first_name,
+// 	bio:req.session.user.bio,
+// 	city:req.session.user.city,
+// 	phone:req.session.user.phone,
+// 	email:req.session.user.email});
+// } 
 	
   
-// tell Express web Framework which port number to listen to.
+// TELL EXPRESS WEB FRAMEWORK PORT NUMBER TO LISTEN TO.
 app.listen(3000, function (req, res) { 
 	console.log('server is running on port 3000.')
 });
