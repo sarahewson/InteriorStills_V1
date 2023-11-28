@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
   
-<head>
+  <head>
     <meta charset="UTF-8"> <!-- Login and register form with Node.js, Express.js and MySQL -->
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Metadata tag - Width & Zoom level of the following code for the page -->
     <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+    
+    
     <title>Portal</title>
     <style>
       body {
           background-image: url('images/interiorbackground.jpg');
       }
-  </style>
+    </style>
   
   <!-- NAV BARS -->
-  <div class=nav1>
+    <div class=nav1>
       <a class href="home">Interior Stills</a>
-  </div>
+    </div>
   
-  <div class=nav2>
+    <div class=nav2>
       <a class href="about">About</a>    
       <a class href="Register">Register</a>
       <a class href="profiles">Search</a>
-  </div>
-</head>
-  
-<body>    
-<!-- LOGIN FORM -->  
-<form action="/login" method="POST">
-  <form class="login-form"> 
-    <h3>Login</h3>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" required>
-    </div>
-  
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
     </div>
 
-    <div class="form-group">					
-      <a href="resetpassword">forgot password?</a>							
-    </div>
-    
-    <button type="submit">Login</button>
-
-    <% if (message) { %>
-      <h3 class="alert alert-danger"><%= message %></h3>
-    <% } %>
-
-    <h6>Create an account. <a href="register">Register here.</a></h6>
   
-  </form>
-</form>
-</div>
+  </head>
+  
+  <body>    
+ 
+    <div class="login container">
 
-</body>
+      <!-- LOGIN FORM --> 
+      <form action="/login" method="POST" class="login-form"> 
+        <h4>Login</h4>
+        
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" required>
+          </div>
+      
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+
+          <div class="form-group">					
+            <a href="resetpassword">forgot password?</a>							
+          </div>
+        
+            <button type="submit">Login</button>
+
+          <% if (message) { %>
+            <h3 class="alert alert-danger"><%= message %></h3>
+          <% } %>
+
+            <h5><a href="register">Register</a> to create an account</h5>
+      
+      </form>
+    </div>
+
+
+  </body>
 </html>

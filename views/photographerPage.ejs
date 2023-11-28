@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
-    <title>Sara Hewson</title>
+    <title><% if (first_name) { %><%= first_name %><% } %></title>
 
-    <!-- head code from w3school upto </style> -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
+  
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
 .bgimg {
@@ -29,28 +27,18 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   <div class=nav2>
     <a class href="profiles">Search</a>
+    <a class href="logout">Log Out</a>
     <!-- <a class href="photographerPage">Edit Profile</a> -->
   </div>
 </head>
 
 
 <body>
-  <!-- PORTFOLIO SECTION -->
-  <div class="w3-padding-32 w3-content" id="portfolio">
-    
-    <% if (first_name) { %>
-      <h2>Welcome, <%= first_name %></h2>
-    <% } else { %>
-      <h2>Welcome, Guest!</h2>
-    <% } %>
-    
-    <!-- <h2 class="w3-text-grey">Welcome S</h2>
-    <hr class="w3-opacity"> -->
-    
+  <!-- PORTFOLIO -->
+    <% if (first_name) { %><h2>Welcome, <%= first_name %></h2><% } %>
 
-
-    <!-- Grid for photos -->
-    <div class="row">
+    <!-- GRID FOR PHOTOS -->
+      <div class="row">
         <div class="w3-row-padding" style="margin:0 -16px">
           <div class="w3-half">
             <!-- <img src="/images/residential_7.jpg" style="width:30%"> -->
@@ -63,26 +51,16 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
             </style>
             <img src="/images/residential_8.jpg" style="width:150%" class="right-float">
             <img src="/images/residential_9.jpg" style="width:90%" class="right-float">
-
           </div>
         </div>
-    </div>
-      
+      </div>
+ 
 
-      
-    <!-- End photo grid -->
-    </div>
-  <!-- End Portfolio Section -->
-  </div>
-
-  <!-- About Section -->
+  <!-- ABOUT -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-32" id="about">
-    <h2>About</h2>
+    <% if (first_name) { %><h2>About <%= first_name %></h2><% } %>
+    <% if (bio) { %><%= bio %><% } %>
     <hr class="w3-opacity">
-    <p>Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing
-      elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </p>
 
   </div>
 
@@ -105,23 +83,18 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </div>
 
     
-  <!-- Contact Section -->
+  <!-- CONTACT-->
   <div class="w3-padding-32 w3-content w3-text-grey" id="contact" style="margin-bottom:64px">
     <h2>Contact</h2>
     <hr class="w3-opacity">
 
     <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> City </p>
-      <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
-      <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> Email: mail@mail.com</p>
+      <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> <% if (city) { %><%= city %><% } %> </p>
+      <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> <% if (phone) { %><%= phone %><% } %></p>
+      <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> <% if (email) { %><%= email %><% } %></p>
     </div>
 
-    <!-- <% if (first_name) { %>
-      <h2>Welcome, <%= first_name %></h2>
-    <% } else { %>
-      <h2>Welcome, Guest!</h2>
-    <% } %> -->
-    
+  
     <!-- Image of location/map -->
     <!-- <img src="/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;margin:32px 0"> -->
    
@@ -137,8 +110,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         </button>
       </p>
     </form>
-  <!-- End Contact Section -->
   </div>  
+  
   
   <!-- Footer -->
   <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin:-24px">
@@ -154,18 +127,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   
 <!-- END PAGE CONTENT -->
 </div>
-
-<script>
-// Open and close sidebar
-function openNav() {
-  document.getElementById("mySidebar").style.width = "60%";
-  document.getElementById("mySidebar").style.display = "block";
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
 
 </body>
 </html>

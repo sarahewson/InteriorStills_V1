@@ -6,6 +6,7 @@
   padding: 14px 16px;
   text-decoration: none;
   font-size: 18px;
+  font-weight:500;
 }
 .nav1, a:hover {
   color: rgb(55, 31, 14);
@@ -18,7 +19,8 @@
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight:500;
 }
 .nav2 a:hover {
   color: rgb(55, 31, 14);
@@ -40,11 +42,12 @@
 
 
 
-/* Profiles Page Styling */
-body {
+/* PROFILES PAGE */
+body, h1,h2,h3,h4,h5,h6 {
+  color: rgb(55, 31, 14);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: #f1f1f1;
   padding: 20px;
-  font-family: Arial;
   box-sizing: border-box;
   align-items: center;
 }
@@ -65,7 +68,7 @@ h3 {
 
 .row {
   margin: 10px;
-}
+} */
 
 .row {
   margin: 10px -16px;
@@ -109,21 +112,22 @@ h3 {
   border: none;
   outline: none;
   padding: 15px 15px;
+  color: rgb(55, 31, 14);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .btn:hover {
   background-color: #ddd;
 }
 
-.btn.active {
-  background-color: #aaa9a9;
+/* .btn.active {
+  background-color: #aaa9a9; 
   color: white;
-}
+}/*
 
 .div {
   overflow: auto;
 }
-
 
 
 /* LOGIN FORM */
@@ -135,8 +139,8 @@ h3 {
 }
 
 /* Style for the form container */
-.login-form, .register-form {
-  max-width: 320px;
+.login-form, .register-form, .about {
+  max-width: 500px;
   margin: 0 auto;
   padding: 10px;
 }
@@ -161,8 +165,8 @@ button[type="submit"] {
   border: none;
   color: rgb(55, 31, 14);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: white;
-  opacity: 0.8;
+  background-color:rgb(254, 239, 220);
+  opacity: 0.1;
   border-radius: 4px;
 }
 
@@ -182,10 +186,12 @@ button:hover {
   opacity: 0.1;
 }
 
-h6, a {
+h4, h5, a {
   color: rgb(55, 31, 14);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
+  border-radius: 4px;
+  opacity: 0.8;
 }
 
 
@@ -198,44 +204,4 @@ h6, a {
 
 
 
-
-
-/* about page */
-/* .aboutparagraph {
-  text-align: center;
-  width: 600px;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-  /* style dbRead */
-/* p::first-letter {
-  font-size:150%;
-  font-style: bold;
-}
-
-table {
-  border-collapse: collapse;
-  width: 38;
-}
-
-th, td {
-  padding: 10px;
-  text-align: center;
-  border-bottom: 2px solid #ddd;
-}
-
-th {
-  background-color: yellow;
-}
-
-tr:hover {background-color:lime;} */
+ 
