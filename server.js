@@ -1,6 +1,7 @@
 
 const express = require('express');			// import Express web Framework from NodeJS.
 const session = require('express-session');	// import middleware to manage session data in web applications
+// const MySQLStore = require('express-mysql-session')(session);
 const path = require('path');				// provides utilities for working with file and directory paths
 const db = require('./dbConfig');			// set path for public folder.		
 const mysql = require('mysql'); 			// import mySQL.(**move to dbConfig.js later)
@@ -10,10 +11,11 @@ dotenv.config({ path: './.env'}); 			// point const env to .env file path (same 
 const app = express(); 						// start server.
 const bcryptjs = require('bcryptjs');		// import JavaScript library used for password hashing	
 const publicDirectory = path.join(__dirname, './public'); 	// define the Public directory to CSS & images.
-
+// const sessionStore = new MySQLStore({/* MySQL session store configuration */});
 
 app.use(express.static(publicDirectory)); // Point Express to use the static files in publicDirectory.
 app.use(session({secret: 'yoursecret', resave: true, saveUninitialized: true}));
+// app.use(session({secret: 'your_secret_key', store: sessionStore, resave: false, saveUninitialized: false}));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -23,6 +25,14 @@ app.set('view engine', 'ejs'); 			// set ejs engine to display HTML.
 app.use('/public', express.static('public')); 	// serve up static CSS files in public/stylesheets folder when public link is called in ejs files.
 
 
+// Middleware to check if the user is logged in
+// const isLoggedIn = (req, res, next) => {
+//     if (req.session.loggedin) {
+//         next(); // User is logged in; proceed to the next middleware/route handler
+//     } else {
+//         res.redirect('/login'); // Redirect unauthorized users to the login page
+//     }
+// };
 
 // ROUTE SETUP
 app.get('/home', function(req, res) {
@@ -41,17 +51,13 @@ app.get('/login', function(req, res) {
 	res.render('login',{title: 'photographers portal', message: null});
 });
 
-// app.get('/logout', function(req, res) {
-// 	res.render('home',{title: 'home'});
-// });
-
 app.get('/profiles', function(req, res) {
 	res.render('profiles',{title: 'profiles'});
 });
 
-app.get('/photographerPage', function(req, res) {
-	res.render('photographerPage', {title: 'photographerPage', first_name: null });
-});
+// app.get('/photographerPage', function(req, res) {
+// 	res.render('photographerPage', {title: 'photographerPage', first_name: null });
+// });
 
 app.get('/logout', function(req, res) {
 	// Destroy the session
@@ -83,7 +89,7 @@ app.post('/register', async function(req, res, next) {
 	var last_name = req.body.last_name;
 	var email = req.body.email;
 	var password = req.body.password;
-	var password_confirm = req.body.password_confirm;
+	// var password_confirm = req.body.password_confirm;
   
 	// Hash the password
 	let hashed_password = await bcryptjs.hash(password, 8);
@@ -94,12 +100,12 @@ app.post('/register', async function(req, res, next) {
 	  if (err) {
 		console.log('Error:', err);
 		return res.render('register', {
-		  message: 'Error checking email existence'
+		  message: 'Error checking email address.'
 		});
 	  }
   
 	  if (results.length > 0) {
-		console.log('Email already exists.');
+		console.log('This email is already in use.');
 		return res.render('register', {
 		  message: 'You already have an account with this email address.'
 		});
@@ -120,7 +126,7 @@ app.post('/register', async function(req, res, next) {
 		  req.session.loggedin = true;
 		  req.session.email = email;
 		  console.log('User registered');
-		  return res.render('/photographerPage');
+		  return res.render('photographerPage');
 		} else {
 		  console.log('Registration failed for an unknown reason');
 		  return res.render('register', {
@@ -158,6 +164,7 @@ app.post('/login', function (req, res) {
 			if (passwordMatch) {
 				// Passwords match, user is authenticated
 				req.session.user = user;
+				req.session.loggedin = true;  // see if req.session.loggedin = true; helps the user stay logged in?
 				console.log(req.session.user);
 
 			if (user.user_type === 'photographer') {
@@ -166,6 +173,7 @@ app.post('/login', function (req, res) {
 				res.render('photographerPage', { 
 				title: 'xyz', 
 				first_name:req.session.user.first_name,
+				// last_name:req.session.user.last_name,
 				bio:req.session.user.bio,
 				city:req.session.user.city,
 				phone:req.session.user.phone,
@@ -185,11 +193,13 @@ app.post('/login', function (req, res) {
 
 // DISPLAY DATABASE FIELDS FROM USER LOGIN SESSION.
 app.get('/photographerPage', function(req, res) {
+	console.log('this is the photographerPage');
 	// Check if the user is logged in
     if (!req.session.user) {
         // If the user is not logged in, redirect to the login page
         return res.redirect('/login');
     }
+	console.log(req.session.user);
 	// correspond with line 157. Render the photographerPage with user information.
 	res.render('photographerPage', { 
 	title: 'xyz', 
@@ -201,46 +211,59 @@ app.get('/photographerPage', function(req, res) {
 	});
   });
 
-// DISPLAY fields from database in HTML
-app.get('/profiles', function(req, res) {
-    var first_name = req.body.first_name;
-	var last_name = req.body.last_name;
+
+// // DISPLAY PhotographerAll PAGE TO SITE VISITORS WITHOUT LOGIN SESSION.
+// Handle GET requests for '/photographerAll'
+app.get('/photographerAll', function(req, res) {
+    // You might include some logic here to fetch necessary data for rendering the photographerAll page
+    res.render('photographerAll', { title: 'photographerAll' });
 });
-	db.query("SELECT * first_name, last_name FROM user", [first_name, last_name], function (err, result) {
-				if (err) throw err;
-				console.log(result);
-				res.render('profiles', { 
-					title: 'xyz', 
-					first_name: req.body.first_name,
-					last_name:req.body.last_name,
-					});
-				  });
 
-	// correspond with line 157. Render the photographerPage with user information.
-// 	res.render('profiles', { 
-// 	title: 'xyz', 
-// 	first_name: req.session.user.first_name,
-// 	bio:req.session.user.bio,
-// 	city:req.session.user.city,
-// 	phone:req.session.user.phone,
-// 	email:req.session.user.email
-// 	});
-//   });
+// Handle POST requests for '/photographerAll'
+app.post('/photographerAll', function(req, res) {
+    console.log('this is the photographerAll POST request');
+    // Processing POST request logic here
+    res.redirect('/photographerAll'); // Redirect to GET '/photographerAll'
+});
 
 
-// if (user.user_type === 'photographer') {
-// 	// Regular user is authenticated
-// 	console.log("User Type: photographer");
-// 	res.render('photographerPage', { 
-// 	title: 'xyz', 
-// 	first_name:req.session.user.first_name,
-// 	bio:req.session.user.bio,
-// 	city:req.session.user.city,
-// 	phone:req.session.user.phone,
-// 	email:req.session.user.email});
-// } 
-	
+
+//   app.get('/photographerAll', function(req, res) {
+//     // Retrieve image paths or data from the database in this route
+//     var sql = `SELECT photo_path FROM photographs WHERE user_id = ?`;
+//     // Assuming you have a user_id from the query string
+//     const user_id = req.query.user_id;
+
+//     db.query(sql, [user_id], function(err, results) {
+//         if (err) {
+//             // Handle the error accordingly
+//             console.error(err);
+//             res.status(500).send('Error retrieving data from the database');
+//         } else {
+//             // Extract image paths from the results
+//             const imagePaths = results.map(result => result.photo_path);
+            
+//             // Render the page or send the image paths to the client
+//             res.render('photographerAll', { imagePaths: imagePaths });
+//         }
+//     });
+// });
+
+// app.post('/photographerAll', function(req, res) {
+//     // Handle data from the POST request, if needed
+//     // For example, you can access the user_id sent via POST
+//     const user_id = req.body.user_id;
+
+//     // Redirect or perform actions based on the POST request
+//     res.redirect('/photographerAll?user_id=' + user_id);
+// });
+
+
   
+
+
+
+	
 // TELL EXPRESS WEB FRAMEWORK PORT NUMBER TO LISTEN TO.
 app.listen(3000, function (req, res) { 
 	console.log('server is running on port 3000.')

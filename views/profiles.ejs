@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+    <link href= "/public/stylesheets/style-profiles.css" rel="stylesheet" type="text/css"/>
     <title>Search</title>
     
   <!-- NAV BARS -->
@@ -12,115 +12,115 @@
   </div>
 
   <div class=nav2>
-    <a class href="login">Photographers Portal</a>
     <a class href="about">About</a>
+    <a class href="login">Photographer Portal</a>
   </div>
+
 </head>
 
 <body>
-  <!-- MAIN WEBSITE -->
+
+  <!-- FILTER CATEGORIES -->
   <div class="main">
+  <h2>LISTED PHOTOGRAPHERS</h2>
 
-  <h3>LISTED PHOTOGRAPHERS</h3>
+    <div id="myBtnContainer" class="button-columns">
+      <button class="btn" data-filter="all"> All categories</button>
+      <button class="btn" data-filter="residential"> Residential</button>
+      <button class="btn" data-filter="retail"> Retail</button>
+      <button class="btn" data-filter="hospitality"> Hospitality</button>
+    </div>
     
-    <!-- <div id="myBtnContainer"> -->
-      <button class="btn" onclick="filterSelection('all')"> Show all</button>
-      <button class="btn" onclick="filterSelection('residential')"> Residential</button>
-      <button class="btn" onclick="filterSelection('retail')"> Retail</button>
-      <button class="btn" onclick="filterSelection('hospitality')"> Hospitality</button>
-    <!-- </div> -->
-
-
-    
-    <!-- Portfolio Gallery Grid -->
+    <!-- LISTED PHOTOGRAPERS -->
     <div class="row">
+      
+      <!-- <div class="column residential"> -->
+      <div class="column residential">
+        <div class="content">
+          <a href="/photographerAll"> 
+            <img src="/images/residential_12.jpg" alt="Interior_image" style="width:100%">
+            <h4> Sara Hewson </h4>
+          </a>
+        </div>
+      </div>
+    
+
       
       <div class="column residential">
         <div class="content">
-          <a href="/photographerPage"> 
-            <img src="/images/residential_2.jpg" alt="Residential_Interior" style="width:100%">
-            <h4><% if (first_name) { %><%= first_name %><% } %></h4>
+          <a href="/photographerAll">
+          <img src="/images/residential_11.jpg" alt="Interior_image" style="width:100%">
+          <h4> Hamish Morgan </h4>
+          </a>
+        </div>
+      </div>
+     
+    
+      <div class="column hospitality">
+        <div class="content">
+          <a href="/photographerAll">
+          <img src="/images/hospitality_4.jpg" alt="Interior_image" style="width:100%">
+          <h4>Richard Hewson</h4>
           </a>
         </div>
       </div>
 
 
-      <div class="column residential">
-        <div class="content">
-          <img src="/images/residential_1.jpg" alt="Residential_Interior" style="width:100%">
-        </div>
-      </div>
-     
-    
       <div class="column retail">
         <div class="content">
-          <img src="/images/retail_1.jpg" alt="Retail_Interior" style="width:100%">
-          <h4>Photographer 3</h4>
+          <a href="/photographerAll">
+          <img src="/images/retail_4.jpg" alt="Interior_image" style="width:100%">
+          <h4>Mary Lamb</h4>
+          </a>
         </div>
       </div>
 
-
-      <div class="column hospitality">
+      <!-- no photography category -->
+      <div class="column no-category">
         <div class="content">
-          <img src="/images/hospitality_1.jpg" alt="Hospitality_Interior" style="width:100%">
-          <h4>Photographer 4</h4>
+          <a href="/photographerAll">
+          <img src="/images/no-category_4.jpg" alt="Interior_image" style="width:100%">
+          <h4>Jane Pickles</h4>
+          </a>
         </div>
       </div>
-
-    
-    <!-- END GRID -->
-    </div>
-    
-  <!-- END MAIN -->
+     <!--END DIV CLASS "MAIN"  -->
     </div>
     
 
-    <script>
-      filterSelection("all")
-      function filterSelection(c) {
-        var x, i;
-        x = document.getElementsByClassName("column");
-        if (c == "all") c = "";
-        for (i = 0; i < x.length; i++) {
-          w3RemoveClass(x[i], "show");
-          if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
-        }
+  
+
+<!-- CATEGORY FILTERING SCRIPT -->
+<script>
+  filterSelection("all");
+  
+  function filterSelection(c) {
+    var x, i;
+    x = document.getElementsByClassName("column");
+    if (c == "all") c = "";
+    for (i = 0; i < x.length; i++) {
+      if (x[i].className.indexOf(c) > -1 || c === "") {
+        x[i].classList.add("show");
+      } else {
+        x[i].classList.remove("show");
       }
-      
-      function w3AddClass(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-          if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
-        }
+    }
+  }
+  
+  var btnContainer = document.getElementById("myBtnContainer");
+  var btns = btnContainer.getElementsByClassName("btn");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+      var current = document.getElementsByClassName("active");
+      if (current.length > 0) {
+        current[0].classList.remove("active");
       }
-      
-      function w3RemoveClass(element, name) {
-        var i, arr1, arr2;
-        arr1 = element.className.split(" ");
-        arr2 = name.split(" ");
-        for (i = 0; i < arr2.length; i++) {
-          while (arr1.indexOf(arr2[i]) > -1) {
-            arr1.splice(arr1.indexOf(arr2[i]), 1);     
-          }
-        }
-        
-        element.className = arr1.join(" ");
-      }
-      
-      
-      // Add active class to the current button (highlight it)
-      var btnContainer = document.getElementById("myBtnContainer");
-      var btns = btnContainer.getElementsByClassName("btn");
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].addEventListener("click", function(){
-          var current = document.getElementsByClassName("active");
-          current[0].className = current[0].className.replace(" active", "");
-          this.className += " active";
-        });
-      }
-      </script>
+      this.classList.add("active");
+      filterSelection(this.getAttribute("data-filter"));
+    });
+  }
+</script>
+
 
 </body>
 </html>
