@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href= "/public/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+    <link href= "/public/stylesheets/style-photographer.css" rel="stylesheet" type="text/css"/>
     <title><% if (first_name) { %><%= first_name %><% } %></title>
 
-<style>
 
-  
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-.w3-row-padding img {margin-bottom: 12px}
-.bgimg {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url('/w3images/profile_girl.jpg');
-  min-height: 100%;
-}
-</style>
+    <style>
+      .body, h1,h2,h3,h4,h5,h6,p {font-family: "Verdana", Geneva, Tahoma, sans-serif}
+      .body, h1,h2,h3,h4,h5,h6,p {color: rgb(72, 44, 25)}
+      .h2 {display:flex}
+      .h2 {justify-content: center}
+      .row-padding img {margin-top: 35px}
+      .row-padding img {margin-right: 50px}
+      .row-padding img {margin-left: 30px}
+      /* .row-padding {margin-top: -100px} */
+    </style>
 
 <!-- NAV BARS -->
   <div class=nav1>
@@ -27,6 +25,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   <div class=nav2>
     <a class href="profiles">Search</a>
+    <a class href="login">Photographer Portal</a>
+    <a class href="about">About</a>
     <a class href="logout">Log Out</a>
     <!-- <a class href="photographerPage">Edit Profile</a> -->
   </div>
@@ -34,103 +34,67 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 
 <body>
-  <!-- PORTFOLIO -->
-    <% if (first_name) { %><h2>Welcome, <%= first_name %></h2><% } %>
-
-    <!-- GRID FOR PHOTOS -->
-      <div class="row">
-        <div class="w3-row-padding" style="margin:0 -16px">
-          <div class="w3-half">
-            <!-- <img src="/images/residential_7.jpg" style="width:30%"> -->
-            <style>
-              /* Apply float left to align images to the left */
-              .right-float {
-                float: left;
-                margin-right: 500px; /* Add some space between images */
-              }
-            </style>
-            <img src="/images/residential_8.jpg" style="width:150%" class="right-float">
-            <img src="/images/residential_9.jpg" style="width:90%" class="right-float">
-          </div>
+  
+    <!-- GRID FOR PHOTOGRAPHER PORTFOLIO -->
+    <div class="row">
+      <% if (first_name) { %><h2>Welcome, <%= first_name %></h2><% } %>
+      <!-- <div class="row-padding" style="margin:40px -16px"> -->
+        <div class="row-padding" style="margin-bottom:-40px">
+        <div class="w3-half">
+          <img src="/images/residential_12.jpg" alt="Interior_image" style="width:50%">
+          <img src="/images/residential_8.jpg" alt="Interior_image" style="width:50%">
         </div>
       </div>
+    </div>
  
 
-  <!-- ABOUT -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-32" id="about">
-    <% if (first_name) { %><h2>About <%= first_name %></h2><% } %>
-    <% if (bio) { %><%= bio %><% } %>
-    <hr class="w3-opacity">
-
+  <!-- BIO -->
+  <div class="row">
+    <h2>Photographer Biography</h2>
+    <h4><% if (bio) { %><%= bio %><% } %></h4>
   </div>
 
-  <div class="row">
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-half">
-        <!-- <img src="/images/residential_7.jpg" style="width:30%"> -->
-        <style>
-          /* Apply float left to align images to the left */
-          .right-float {
-            float: left;
-            margin-right: 500px; /* Add some space between images */
-          }
-        </style>
-        <img src="/images/residential_10.jpg" style="width:80%" class="right-float">
-        <img src="/images/residential_12.jpg" style="width:90%" class="right-float">
+  
 
+  <div class="row">
+    <!-- <div class="row-padding" style="margin:40px -16px"> -->
+      <div class="row-padding" style="margin-top:-40px">
+    <div class="row-padding">
+      <div class="w3-half">
+        <img src="/images/residential_9.jpg" alt="Interior_image" style="width:50%">
+        <img src="/images/residential_10.jpg" alt="Interior_image" style="width:29%">
       </div>
     </div>
+  </div>
 </div>
 
     
   <!-- CONTACT-->
-  <div class="w3-padding-32 w3-content w3-text-grey" id="contact" style="margin-bottom:64px">
+  <div class="row">
     <h2>Contact</h2>
-    <hr class="w3-opacity">
 
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-xxlarge w3-margin-right"></i> <% if (city) { %><%= city %><% } %> </p>
-      <p><i class="fa fa-phone fa-fw w3-xxlarge w3-margin-right"></i> <% if (phone) { %><%= phone %><% } %></p>
-      <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> <% if (email) { %><%= email %><% } %></p>
+    <div class="contact">
+      <p><i class="content"></i> Location: <% if (city) { %><%= city %><% } %> </p>
+      <p><i class="content"></i> Mobile: <% if (phone) { %><%= phone %><% } %> </p>
+      <p><i class="content"> </i> Email: <% if (email) { %><%= email %><% } %> </p>
     </div>
 
-  
-    <!-- Image of location/map -->
-    <!-- <img src="/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;margin:32px 0"> -->
    
     <p>Lets get in touch. Send me a message:</p>
     <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Email" required name="Email"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Subject" required name="Subject"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message" required name="Message"></p>
-      <p>
-        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+      <p><input type="text" placeholder="Name" required name="Name"></p>
+      <p><input type="text" placeholder="Email" required name="Email"></p>
+      <p><input type="text" placeholder="Subject" required name="Subject"></p>
+      <textarea> </textarea>
+      
+     <p>
+        <button type="submit">
           <i class="fa fa-paper-plane"></i> SEND MESSAGE
         </button>
-      </p>
-    </form>
-  </div>  
+     </p> 
   
-  
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin:-24px">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
-    
-  <!-- End footer -->
-  </footer>
-  
-<!-- END PAGE CONTENT -->
+
 </div>
-
-</body>
-</html>
-
 
 </body>
 </html>

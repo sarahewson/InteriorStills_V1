@@ -26,12 +26,13 @@
   color: rgb(55, 31, 14);
 }
 
+/* HOME PAGE MAIN LINK */
 .profiles a {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgb(72, 44, 25);
   float: right;
   text-align: right;
-  padding: 140px 30px;
+  padding: 30px 30px 5px 30px;
   text-decoration: none;
   font-size: 100px;
   font-weight: bold;
@@ -52,147 +53,6 @@ body, h1,h2,h3,h4,h5,h6 {
   align-items: center;
 }
 
-/* Center website */
-.main {
-  max-width: 650px;
-  margin: auto;
-}
-
-h3 {
-  color: rgb(55, 31, 14);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
-  /* font-size: 35px; */
-  word-break: break-all;
-}
-
-.row {
-  margin: 10px;
-} */
-
-.row {
-  margin: 10px -16px;
-}
-
-/* Add padding BETWEEN each column */
-.row,
-.row > .column {
-  padding: 20px;
-}
-
-/* Create three equal columns that floats next to each other */
-.column {
-  float: center;
-  width: 100%;
-  display: none;
- }
-
-
-/* Clear floats after rows */ 
-/* .row:after {
-  content: "";
-  display: table;
-  clear: both;
-} */
-
-/* Content */
-.content {
-  padding: 30px;
-}
-
-/* The "show" class is added to the filtered elements */
-.show {
-  display: block;
-}
-
-/* Style the buttons */
-.btn {
-  text-align: left;
-  display: flex;
-  border: none;
-  outline: none;
-  padding: 15px 15px;
-  color: rgb(55, 31, 14);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.btn:hover {
-  background-color: #ddd;
-}
-
-/* .btn.active {
-  background-color: #aaa9a9; 
-  color: white;
-}/*
-
-.div {
-  overflow: auto;
-}
-
-
-/* LOGIN FORM */
-/* Reset default form styles */
-* {
-  box-sizing: border-box;
-  margin: 10;
-  padding: 0;
-}
-
-/* Style for the form container */
-.login-form, .register-form, .about {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 10px;
-}
-
-/* Style for form elements */
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  color: rgb(55, 31, 14);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-input[type="text"],
-input[type="password"],
-button[type="submit"] {
-  width: 100%;
-  padding: 8px;
-  border: none;
-  color: rgb(55, 31, 14);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color:rgb(254, 239, 220);
-  opacity: 0.1;
-  border-radius: 4px;
-}
-
-button {
-  color: rgb(55, 31, 14);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  float: center;
-  text-align: center;
-  width: 40%;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: rgb(55, 31, 14);
-  opacity: 0.1;
-}
-
-h4, h5, a {
-  color: rgb(55, 31, 14);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
-  border-radius: 4px;
-  opacity: 0.8;
-}
 
 
 
@@ -201,7 +61,3 @@ h4, h5, a {
 
 
 
-
-
-
- 

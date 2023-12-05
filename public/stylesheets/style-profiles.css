@@ -1,0 +1,142 @@
+.nav1 a {
+    float: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(72, 44, 25);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight:500;
+  }
+  .nav1, a:hover {
+    color: rgb(55, 31, 14);
+  }
+  
+  .nav2 a {
+    float: right;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(72, 44, 25);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight:500;
+  }
+  .nav2 a:hover {
+    color: rgb(55, 31, 14);
+  }
+
+
+
+  /* PROFILES PAGE */
+body {
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #f1f1f1;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #f1f1f1;
+    padding: 15px 40px 50px;
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  
+  /* LISTED PHOTOGRAPHER ROW SIZING */
+  .main {
+    max-width: 900px;
+    margin: auto;
+    /* padding: 50px; */
+  }
+  
+  /* CATEGORY FILTER GRID */
+  .button-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-gap: 10px;
+    justify-content: center;
+    padding: 40px 130px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+ /* CATEGORY BUTTONS */
+  .btn {
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 100%; /* Ensure buttons take full width of grid cell */
+    padding: 20px;
+  }
+  
+  .btn:hover {
+    background-color: #ddd;
+  }
+  
+  /* .btn.active {
+    background-color: #aaa9a9; 
+    color: white;
+  } */
+  
+  
+  
+  
+  /* .row {
+    margin: 10px;
+  } */
+  
+  /* .row {
+    margin: 10px -16px;
+  } */
+  
+  /* Add padding BETWEEN each column */
+  .row,
+  .row > .column {
+    padding: 10px;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: center;
+    width: 100%;
+    display: none;
+   }
+  
+  
+  /* Clear floats after rows */ 
+  /* .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  } */
+  
+  /* Profiles page padding */
+  .content {
+    padding: 10px;
+  }
+  
+  /* The "show" class is added to the filtered elements */
+  .show {
+    display: block;
+  }
+  
+  
+  /* .div {
+    overflow: auto;
+  } */

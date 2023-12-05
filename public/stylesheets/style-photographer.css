@@ -1,0 +1,83 @@
+.nav1 a {
+    float: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(72, 44, 25);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight:500;
+  }
+  .nav1, a:hover {
+    color: rgb(55, 31, 14);
+  }
+  
+  .nav2 a {
+    float: right;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(72, 44, 25);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight:500;
+  }
+  .nav2 a:hover {
+    color: rgb(55, 31, 14);
+  }
+  
+
+  /* .main {
+    max-width: 900px;
+    margin: auto;
+  } */
+
+  .column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    /* grid-gap: 10px; */
+    justify-content: center;
+
+  }
+
+  /* CATEGORY FILTER GRID */
+  .button-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-gap: 10px;
+    justify-content: center;
+    padding: 40px 130px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+ 
+  
+  .row {
+    /* margin: 10px; */
+    text-align: center;
+  }
+  
+  .row {
+    margin: 10px -16px;
+  }
+  
+  /* Add padding BETWEEN each column */
+  .row,
+  .row > .column {
+    padding: 60px;
+  }
+  
+  /* Create three equal columns that floats next to each other */
+  /* .column {
+    float: center;
+    width: 100%;
+    display: none;
+   }
+    */
+
+ .contact, content {
+    margin: 40px 40px 40px 40px;
+}
+
+

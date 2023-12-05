@@ -1,0 +1,124 @@
+/* NAVIGATIO BAR */
+.nav1 a {
+    float: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(72, 44, 25);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight:500;
+  }
+  .nav1, a:hover {
+    color: rgb(55, 31, 14);
+  }
+  
+  .nav2 a {
+    float: right;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(72, 44, 25);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight:500;
+  }
+  .nav2 a:hover {
+    color: rgb(55, 31, 14);
+  }
+  
+  .profiles a {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: rgb(72, 44, 25);
+    float: right;
+    text-align: right;
+    padding: 30px 30px 5px 30px;
+    text-decoration: none;
+    font-size: 100px;
+    font-weight: bold;
+  }
+
+
+/* LOGIN FORM */
+* {
+    box-sizing: border-box;
+    margin: 10;
+    padding: 0;
+  }
+  
+  /* .login-container {
+    margin-top: 50px;
+} */
+
+  /* Style for the form container */
+  .login-form, .register-form, .about {
+    max-width: 500px;
+    /* margin: 0 auto; */
+    margin: 0 auto;
+    padding: 100px;
+  }
+  
+  /* Style for form elements */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  button[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color:rgb(254, 239, 220);
+    opacity: 0.6;
+    border-radius: 4px;
+  }
+  
+  /* button {
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    float: center;
+    text-align: center;
+    width: 40%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: rgb(55, 31, 14);
+    opacity: 0.1;
+  } */
+  
+  h4, h5, a {
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    border-radius: 4px;
+    opacity: 0.8;
+  }
+  
+  h3 {
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: 25px;
+    word-break: break-all;
+  }
+  
+  p {
+    color: rgb(55, 31, 14);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: left;
+    font-size: 20px;
+    margin: 25px;
+  }
