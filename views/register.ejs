@@ -17,15 +17,15 @@
     
 
     <!-- NAV BARS -->
-    <div class=nav1>
-      <a class href="home">Interior Stills</a>
-    </div>
+      <div class=nav1>
+        <a class href="home">Interior Stills</a>
+      </div>
 
-    <div class=nav2>
-      <a class href="about">About</a>
-      <a class href="login">Photographer Portal</a>
-      <a class href="profiles">Search</a>
-    </div>
+      <div class=nav2>
+        <a class href="about">About</a>
+        <a class href="login">Photographer Portal</a>
+        <a class href="profiles">Search</a>
+      </div>
 
   </head>
   
@@ -34,6 +34,7 @@
     <div class="login container">
     <!-- REGISTER FORM -->   
       <form action="/register" method="POST" class="login-form">
+        
         <h3>Create an account</h3> 
 
         <div class="form-group">
@@ -61,13 +62,13 @@
           <input type="password" placeholder="****" name="passwordConfirm" id="password">
         </div>
         
-          <button type="submit">Register</button>
+        <button type="submit">Register</button>
 
           <% if (message) { %>
             <h3 class="alert alert-danger"><%= message %></h3>
           <% } %>
 
-            <h5>Already registered? Login <a href="login">here.</a></h5>
+        <h5>Already registered? Login <a href="login">here.</a></h5>
 
       </form>
     </div>

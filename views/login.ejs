@@ -11,7 +11,6 @@
 
     <style>
       body {background-image: url('images/interiorbackground.jpg')}
-
     </style>
   
   <!-- NAV BARS -->
@@ -30,10 +29,10 @@
   
   <body>    
  
+  <!-- LOGIN FORM --> 
     <div class="login-container">
-
-      <!-- LOGIN FORM --> 
       <form action="/login" method="POST" class="login-form"> 
+        
         <h3>Login</h3>
         
           <div class="form-group">
@@ -50,13 +49,13 @@
             <a href="resetpassword">forgot password?</a>							
           </div>
         
-            <button type="submit">Login</button>
+          <button type="submit">Login</button>
 
           <% if (message) { %>
             <h3 class="alert alert-danger"><%= message %></h3>
           <% } %>
 
-            <h5><a href="register">Register</a> to create an account</h5>
+          <h5><a href="register">Register</a> to create an account</h5>
       
       </form>
     </div>
