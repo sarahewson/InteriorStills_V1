@@ -51,7 +51,7 @@
 } */
 
   /* Style for the form container */
-  .login-form, .register-form, .about {
+  .login-form, .register-form {
     max-width: 500px;
     /* margin: 0 auto; */
     margin: 0 auto;

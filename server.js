@@ -25,14 +25,6 @@ app.set('view engine', 'ejs'); 			// set ejs engine to display HTML.
 app.use('/public', express.static('public')); 	// serve up static CSS files in public/stylesheets folder when public link is called in ejs files.
 
 
-// Middleware to check if the user is logged in
-// const isLoggedIn = (req, res, next) => {
-//     if (req.session.loggedin) {
-//         next(); // User is logged in; proceed to the next middleware/route handler
-//     } else {
-//         res.redirect('/login'); // Redirect unauthorized users to the login page
-//     }
-// };
 
 // ROUTE SETUP
 app.get('/home', function(req, res) {
@@ -55,9 +47,6 @@ app.get('/profiles', function(req, res) {
 	res.render('profiles',{title: 'profiles'});
 });
 
-// app.get('/photographerPage', function(req, res) {
-// 	res.render('photographerPage', {title: 'photographerPage', first_name: null });
-// });
 
 app.get('/logout', function(req, res) {
 	// Destroy the session
@@ -213,21 +202,17 @@ app.get('/photographerPage', function(req, res) {
 
 
 // // DISPLAY PhotographerAll PAGE TO SITE VISITORS WITHOUT LOGIN SESSION.
-// Handle GET requests for '/photographerAll'
 app.get('/photographerAll', function(req, res) {
-    // You might include some logic here to fetch necessary data for rendering the photographerAll page
     res.render('photographerAll', { title: 'photographerAll' });
 });
 
-// Handle POST requests for '/photographerAll'
 app.post('/photographerAll', function(req, res) {
     console.log('this is the photographerAll POST request');
-    // Processing POST request logic here
-    res.redirect('/photographerAll'); // Redirect to GET '/photographerAll'
+    res.redirect('/photographerAll');
 });
 
 
-
+// UNFINISHED CODE...
 //   app.get('/photographerAll', function(req, res) {
 //     // Retrieve image paths or data from the database in this route
 //     var sql = `SELECT photo_path FROM photographs WHERE user_id = ?`;
@@ -260,8 +245,6 @@ app.post('/photographerAll', function(req, res) {
 
 
   
-
-
 
 	
 // TELL EXPRESS WEB FRAMEWORK PORT NUMBER TO LISTEN TO.
